@@ -1,9 +1,10 @@
 package com.simpledemo.web;
 
+import java.io.PrintWriter;
 import java.util.List;
 
-/*import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;*/
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,66 +22,70 @@ import com.simpledemo.exception.NoNumberException;
 import com.simpledemo.exception.RepeatAppointException;
 import com.simpledemo.service.BookService;
 
+import javax.servlet.http.HttpServletResponse;
+
 @Controller
 @RequestMapping("/book")
 public class BookController {
 
-	//private Logger logger = LoggerFactory.getLogger(getClass());
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
-	@Autowired
-	private BookService bookService;
+    @Autowired
+    private BookService bookService;
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(Model model) {
-		List<Book> list = bookService.getList();
-		model.addAttribute("list", list);
-		// list.jsp + model = ModelAndView
-		return "list"; // WEB-INF/jsp/"list.jsp"
-	}
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public void list(HttpServletResponse response) throws Exception {
+        List<Book> list = bookService.getList();
+        //model.addAttribute("list", list);
+        // list.jsp + model = ModelAndView
+        PrintWriter p = response.getWriter();
+        p.println("dsfdssdfs");
+        //return "qe"; // WEB-INF/jsp/"list.jsp"
+    }
 
-	@RequestMapping(value = "/{bookId}/detail", method = RequestMethod.GET)
-	private String detail(@PathVariable("bookId") Long bookId, Model model) {
-		if (bookId == null) {
-			return "redirect:/book/list";
-		}
+    @RequestMapping(value = "/{bookId}/detail", method = RequestMethod.GET)
+    private String detail(@PathVariable("bookId") Long bookId, Model model) {
+        if (bookId == null) {
+            return "redirect:/book/list";
+        }
 
-		Book book = bookService.getById(bookId);
+        Book book = bookService.getById(bookId);
 
-		if (book == null) {
-			return "forward:/book/list";
-		}
+        if (book == null) {
+            return "forward:/book/list";
+        }
 
-		model.addAttribute("book", book);
+        model.addAttribute("book", book);
 
-		return "detail";
-	}
+        return "detail";
+    }
 
-	// ajax json
-	@RequestMapping(value = "/{bookId}/appoint", method = RequestMethod.POST, produces = {
-			"application/json; charset=utf-8" })
+    // ajax json
+    @RequestMapping(value = "/{bookId}/appoint", method = RequestMethod.POST, produces = {
+            "application/json; charset=utf-8"})
 
-	@ResponseBody
-	private Result<AppointExecution> appoint(@PathVariable("bookId") Long bookId,
-			@RequestParam("studentId") Long studentId) {
-		if (studentId == null || studentId.equals("")) {
-			return new Result(false, "学号不能为空");
-		}
-		// AppointExecution execution = bookService.appoint(bookId,studentId);
-		AppointExecution execution = null;
+    @ResponseBody
+    private Result<AppointExecution> appoint(@PathVariable("bookId") Long bookId,
+                                             @RequestParam("studentId") Long studentId) {
+        if (studentId == null || studentId.equals("")) {
+            return new Result(false, "学号不能为空");
+        }
+        // AppointExecution execution = bookService.appoint(bookId,studentId);
+        AppointExecution execution = null;
 
-		try {
-			execution = bookService.appoint(bookId, studentId);
-		} catch (NoNumberException e1) {
-			// TODO: handle exception
-			execution = new AppointExecution(bookId, AppointStateEnum.NO_NUMBER);
-		} catch (RepeatAppointException e2) {
-			// TODO: handle exception
-			execution = new AppointExecution(bookId, AppointStateEnum.REPEAT_APPOINT);
-		} catch (Exception e) {
-			// TODO: handle exception
-			execution = new AppointExecution(bookId, AppointStateEnum.INNER_ERROR);
-		}
+        try {
+            execution = bookService.appoint(bookId, studentId);
+        } catch (NoNumberException e1) {
+            // TODO: handle exception
+            execution = new AppointExecution(bookId, AppointStateEnum.NO_NUMBER);
+        } catch (RepeatAppointException e2) {
+            // TODO: handle exception
+            execution = new AppointExecution(bookId, AppointStateEnum.REPEAT_APPOINT);
+        } catch (Exception e) {
+            // TODO: handle exception
+            execution = new AppointExecution(bookId, AppointStateEnum.INNER_ERROR);
+        }
 
-		return new Result<AppointExecution>(true, execution);
-	}
+        return new Result<AppointExecution>(true, execution);
+    }
 }

@@ -1,20 +1,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.simpledemo</groupId>
-	<artifactId>ssmDemo</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>ssmDemo Maven Webapp</name>
-  <url>http://maven.apache.org</url>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-    
-    <!-- 1.日志 -->
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.simpledemo</groupId>
+    <artifactId>ssmDemo</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>ssmDemo Maven Webapp</name>
+    <url>http://maven.apache.org</url>
+    <packaging>war</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- 1.日志 -->
         <!-- 实现slf4j接口并整合 -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -66,6 +68,8 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
+            <!--运行时使用-->
+            <scope>provided</scope>
             <version>3.1.0</version>
         </dependency>
 
@@ -138,9 +142,18 @@
             <artifactId>commons-collections</artifactId>
             <version>3.2</version>
         </dependency>
-    
-  </dependencies>
-  <build>
-    <finalName>ssmDemo</finalName>
-  </build>
+
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <port>8081</port>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
