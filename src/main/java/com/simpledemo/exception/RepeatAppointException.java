@@ -2,6 +2,8 @@ package com.simpledemo.exception;
 
 /**
  * 库存不足异常
+ *
+ * @author Administrator
  */
 public class RepeatAppointException extends RuntimeException {
 
