@@ -3,7 +3,7 @@ package com.simpledemo.model.user;
 /**
  * @author Administrator
  */
-public class QueryUserModel {
+public class UserQueryModel {
     private long userId;
 
     public long getUserId() {
