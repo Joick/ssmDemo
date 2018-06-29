@@ -84,9 +84,9 @@ public class UserController {
 
         Result<List<SysAdminRoles>> result = new Result<List<SysAdminRoles>>();
 
-        List<SysAdminRoles> roles=reqModel.
-
-        roleService.insertRoles()
+//        List<SysAdminRoles> roles=reqModel.
+//
+//        roleService.insertRoles()
         result.success();
 
         return result;
