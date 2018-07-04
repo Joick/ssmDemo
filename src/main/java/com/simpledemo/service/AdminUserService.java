@@ -1,11 +1,11 @@
 package com.simpledemo.service;
 
-import com.simpledemo.entity.SysAdminUser;
+import com.simpledemo.entity.AdminUser;
 
 /**
  * @author Administrator
  */
-public interface SysAdminUserService {
+public interface AdminUserService {
 
     /**
      * 获取用户
@@ -13,5 +13,5 @@ public interface SysAdminUserService {
      * @param id
      * @return
      */
-    SysAdminUser getSysAdminUser(long id);
+    AdminUser getSysAdminUser(long id);
 }

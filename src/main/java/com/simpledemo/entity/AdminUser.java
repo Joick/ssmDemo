@@ -2,7 +2,10 @@ package com.simpledemo.entity;
 
 import java.util.Date;
 
-public class SysAdminUser {
+/**
+ * @author Administrator
+ */
+public class AdminUser {
     private Long id;
 
     private String name;
@@ -35,7 +38,7 @@ public class SysAdminUser {
 
     private Date modifyTime;
 
-    public SysAdminUser(Long id, String name, String account, String password, String salt, String gender, String avatar, String phone, String email, Long status, Boolean enabled, Boolean isactive, Long createUser, Date createTime, Long modifyUser, Date modifyTime) {
+    public AdminUser(Long id, String name, String account, String password, String salt, String gender, String avatar, String phone, String email, Long status, Boolean enabled, Boolean isactive, Long createUser, Date createTime, Long modifyUser, Date modifyTime) {
         this.id = id;
         this.name = name;
         this.account = account;
@@ -54,7 +57,7 @@ public class SysAdminUser {
         this.modifyTime = modifyTime;
     }
 
-    public SysAdminUser() {
+    public AdminUser() {
         super();
     }
 

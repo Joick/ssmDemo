@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.simpledemo.dao.SysAdminRolesMapper">
-    <resultMap id="BaseResultMap" type="com.simpledemo.entity.SysAdminRoles">
+<mapper namespace="com.simpledemo.dao.AdminRolesMapper">
+    <resultMap id="BaseResultMap" type="com.simpledemo.entity.AdminRoles">
         <constructor>
             <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT"/>
             <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
@@ -79,13 +79,13 @@
     id, name, parent_id, description, enabled, isactive, create_user, create_time, modify_user, 
     modify_time
   </sql>
-    <select id="selectByExample" parameterType="com.simpledemo.entity.SysAdminRolesExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.simpledemo.entity.AdminRolesExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List"/>
-        from sys_admin_roles
+        from admin_roles
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
@@ -96,21 +96,21 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from sys_admin_roles
+        from admin_roles
         where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from sys_admin_roles
+    delete from admin_roles
     where id = #{id,jdbcType=BIGINT}
   </delete>
-    <delete id="deleteByExample" parameterType="com.simpledemo.entity.SysAdminRolesExample">
-        delete from sys_admin_roles
+    <delete id="deleteByExample" parameterType="com.simpledemo.entity.AdminRolesExample">
+        delete from admin_roles
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.simpledemo.entity.SysAdminRoles">
-    insert into sys_admin_roles (id, name, parent_id, 
+    <insert id="insert" parameterType="com.simpledemo.entity.AdminRoles">
+    insert into admin_roles (id, name, parent_id, 
       description, enabled, isactive, 
       create_user, create_time, modify_user, 
       modify_time)
@@ -119,8 +119,8 @@
       #{createUser,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{modifyUser,jdbcType=BIGINT}, 
       #{modifyTime,jdbcType=TIMESTAMP})
   </insert>
-    <insert id="insertSelective" parameterType="com.simpledemo.entity.SysAdminRoles">
-        insert into sys_admin_roles
+    <insert id="insertSelective" parameterType="com.simpledemo.entity.AdminRoles">
+        insert into admin_roles
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
@@ -186,14 +186,14 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.simpledemo.entity.SysAdminRolesExample" resultType="java.lang.Long">
-        select count(*) from sys_admin_roles
+    <select id="countByExample" parameterType="com.simpledemo.entity.AdminRolesExample" resultType="java.lang.Long">
+        select count(*) from admin_roles
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </select>
     <update id="updateByExampleSelective" parameterType="map">
-        update sys_admin_roles
+        update admin_roles
         <set>
             <if test="record.id != null">
                 id = #{record.id,jdbcType=BIGINT},
@@ -231,7 +231,7 @@
         </if>
     </update>
     <update id="updateByExample" parameterType="map">
-        update sys_admin_roles
+        update admin_roles
         set id = #{record.id,jdbcType=BIGINT},
         name = #{record.name,jdbcType=VARCHAR},
         parent_id = #{record.parentId,jdbcType=BIGINT},
@@ -246,8 +246,8 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.simpledemo.entity.SysAdminRoles">
-        update sys_admin_roles
+    <update id="updateByPrimaryKeySelective" parameterType="com.simpledemo.entity.AdminRoles">
+        update admin_roles
         <set>
             <if test="name != null">
                 name = #{name,jdbcType=VARCHAR},
@@ -279,8 +279,8 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.simpledemo.entity.SysAdminRoles">
-    update sys_admin_roles
+    <update id="updateByPrimaryKey" parameterType="com.simpledemo.entity.AdminRoles">
+    update admin_roles
     set name = #{name,jdbcType=VARCHAR},
       parent_id = #{parentId,jdbcType=BIGINT},
       description = #{description,jdbcType=VARCHAR},
@@ -293,18 +293,9 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-    <!-- 自定义方法 -->
-    <insert id="insertBatch">
-        insert into sys_admin_roles(name, parent_id,
-        description, enabled, isactive,
-        create_user, create_time, modify_user,
-        modify_time)
-        values
-        <foreach collection="list" item="SysAdminRoles" separator=",">
-            (#{SysAdminRoles.name,jdbcType=VARCHAR}, #{SysAdminRoles.parentId,jdbcType=BIGINT},
-            #{SysAdminRoles.description,jdbcType=VARCHAR}, #{SysAdminRoles.enabled,jdbcType=BIT}, #{SysAdminRoles.isactive,jdbcType=BIT},
-            #{SysAdminRoles.createUser,jdbcType=BIGINT}, #{SysAdminRoles.createTime,jdbcType=TIMESTAMP}, #{SysAdminRoles.modifyUser,jdbcType=BIGINT},
-            #{SysAdminRoles.modifyTime,jdbcType=TIMESTAMP})
-        </foreach>
-    </insert>
+    <select id="selectUserRoles" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id,name,parent_id,description,enabled,isactive,create_user,create_time,modify_user,modify_time
+    from admin_roles
+    where find_in_set(id,(select roles from admin_user_roles where userid=#{userId,jdbcType=BIGINT}))
+  </select>
 </mapper>

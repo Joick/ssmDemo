@@ -1,31 +1,28 @@
 package com.simpledemo.entity;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.util.Date;
 
-public class SysAdminUserRoles {
+/**
+ * @author Administrator
+ */
+public class AdminRoles {
     private Long id;
-
-    private Long userid;
-
+    private String name;
+    private Long parentId;
     private String description;
-
     private Boolean enabled;
-
     private Boolean isactive;
-
     private Long createUser;
-
     private Date createTime;
-
     private Long modifyUser;
-
     private Date modifyTime;
 
-    private String roles;
-
-    public SysAdminUserRoles(Long id, Long userid, String description, Boolean enabled, Boolean isactive, Long createUser, Date createTime, Long modifyUser, Date modifyTime, String roles) {
+    public AdminRoles(Long id, String name, Long parentId, String description, Boolean enabled, Boolean isactive, Long createUser, Date createTime, Long modifyUser, Date modifyTime) {
         this.id = id;
-        this.userid = userid;
+        this.name = name;
+        this.parentId = parentId;
         this.description = description;
         this.enabled = enabled;
         this.isactive = isactive;
@@ -33,10 +30,18 @@ public class SysAdminUserRoles {
         this.createTime = createTime;
         this.modifyUser = modifyUser;
         this.modifyTime = modifyTime;
-        this.roles = roles;
     }
 
-    public SysAdminUserRoles() {
+    public AdminRoles(String name, Long parentId, String description, Boolean enabled, Long createUser, Date createTime) {
+        this.name = name;
+        this.parentId = parentId;
+        this.description = description;
+        this.enabled = enabled;
+        this.createUser = createUser;
+        this.createTime = createTime;
+    }
+
+    public AdminRoles() {
         super();
     }
 
@@ -48,12 +53,20 @@ public class SysAdminUserRoles {
         this.id = id;
     }
 
-    public Long getUserid() {
-        return userid;
+    public String getName() {
+        return name;
     }
 
-    public void setUserid(Long userid) {
-        this.userid = userid;
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
     public String getDescription() {
@@ -110,13 +123,5 @@ public class SysAdminUserRoles {
 
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
-    }
-
-    public String getRoles() {
-        return roles;
-    }
-
-    public void setRoles(String roles) {
-        this.roles = roles == null ? null : roles.trim();
     }
 }

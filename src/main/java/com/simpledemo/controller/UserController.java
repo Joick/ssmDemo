@@ -2,14 +2,15 @@ package com.simpledemo.controller;
 
 import com.simpledemo.model.role.RolesInsertModel;
 import com.simpledemo.model.user.UserQueryModel;
-import com.simpledemo.service.SysAdminRolesService;
+import com.simpledemo.service.AdminRolesService;
 import com.simpledemo.utilities.Result;
 import com.simpledemo.entity.*;
-import com.simpledemo.service.SysAdminUserService;
+import com.simpledemo.service.AdminUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,74 +20,54 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private SysAdminUserService userService;
+    private static Result result;
 
     @Autowired
-    private SysAdminRolesService roleService;
+    private AdminUserService userService;
 
-//    @RequestMapping(value = "/detail", method = RequestMethod.POST, produces = {
-//            "application/json; charset=utf-8"})
-//    @ResponseBody
-//    public Result<SysAdminUser> detail(@RequestBody UserQueryModel model) {
-//
-//        Result<SysAdminUser> result = new Result<SysAdminUser>();
-//
-//        long userId = model.getUserId();
-//
-//        if (userId == 0) {
-//            result.fail("userId有误");
-//
-//            return result;
-//        }
-//
-//        SysAdminUser user = userService.getUser(userId);
-//
-//        result.success(user);
-//
-//        return result;
-//    }
+    @Autowired
+    private AdminRolesService roleService;
+
 
     /**
-     * 获取用户权限信息
+     * 获取账户权限
      *
-     * @param model
+     * @param reqModel
      * @return
      */
-//    @RequestMapping(value = "/getUserRoles", method = RequestMethod.POST)
-//    @ResponseBody
-//    public Result<List<SysAdminRoles>> getUserRoles(@RequestBody UserQueryModel model) {
-//
-//        Result<List<SysAdminRoles>> result = new Result<List<SysAdminRoles>>();
-//
-//        long userId = model.getUserId();
-//        if (userId == 0) {
-//            result.fail("用户id不能为空");
-//
-//            return result;
-//        }
-//
-//        List<SysAdminRoles> roles = roleService.listUserRoles(userId);
-//
-//        result.success(roles);
-//
-//        return result;
-//    }
+    @PostMapping(value = "/getUserRoles")
+    @ResponseBody
+    public Result<List<AdminRoles>> getUserRoles(@RequestBody UserQueryModel reqModel) {
+
+        result = new Result<List<AdminRoles>>();
+
+        long userId = reqModel.getUserId();
+
+        if (userId > 0) {
+            List<AdminRoles> userRoles = new ArrayList<AdminRoles>();
+
+            userRoles = roleService.listUserRoles(userId);
+
+            result.success(userRoles);
+
+        } else {
+            result.fail("用户id有误");
+        }
+
+        return result;
+    }
 
     /**
      * 获取权限列表
      *
      * @return
      */
-    @RequestMapping(value = "/addRoles", method = RequestMethod.POST)
+    @RequestMapping(value = "/addRoles.htm", method = RequestMethod.POST)
     @ResponseBody
-    public Result<List<SysAdminRoles>> getRoles(@RequestBody RolesInsertModel reqModel) {
+    public Result<List<AdminRoles>> addRoles(@RequestBody RolesInsertModel reqModel) {
 
-        Result<List<SysAdminRoles>> result = new Result<List<SysAdminRoles>>();
+        result = new Result<List<AdminRoles>>();
 
-//        List<SysAdminRoles> roles=reqModel.
-//
-//        roleService.insertRoles()
         result.success();
 
         return result;

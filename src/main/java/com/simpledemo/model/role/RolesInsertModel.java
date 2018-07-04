@@ -1,8 +1,8 @@
 package com.simpledemo.model.role;
 
-import com.simpledemo.entity.SysAdminRoles;
+import com.simpledemo.entity.AdminRoles;
 
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,10 +20,15 @@ public class RolesInsertModel {
         this.rolePOList = rolePOList;
     }
 
-    public List<SysAdminRoles> convertToEntities(){
-        List<SysAdminRoles> list;
+    public List<AdminRoles> convertToEntities() {
+        List<AdminRoles> list = new ArrayList<AdminRoles>();
 
-        return null;
+        for (RoleInsertPO item :
+                rolePOList) {
+            list.add(item.convertToEntity());
+        }
+
+        return list;
     }
 
     private class RoleInsertPO {
@@ -33,8 +38,8 @@ public class RolesInsertModel {
         private boolean enabled;
         private Date createTime = new Date();
 
-        public SysAdminRoles convertToEntity() {
-            return new SysAdminRoles(name, parentId, description, enabled, (long) 1, createTime);
+        public AdminRoles convertToEntity() {
+            return new AdminRoles(name, parentId, description, enabled, (long) 1, createTime);
         }
     }
 }

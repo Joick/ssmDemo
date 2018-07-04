@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SysAdminRolesExample {
+/**
+ * @author Administrator
+ */
+public class AdminRolesExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public SysAdminRolesExample() {
+    public AdminRolesExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
