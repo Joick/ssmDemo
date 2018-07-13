@@ -62,7 +62,7 @@ public class UserController {
      *
      * @return
      */
-    @RequestMapping(value = "/addRoles.htm", method = RequestMethod.POST)
+    @PostMapping(value = "/addRoles")
     @ResponseBody
     public Result<List<AdminRoles>> addRoles(@RequestBody RolesInsertModel reqModel) {
 

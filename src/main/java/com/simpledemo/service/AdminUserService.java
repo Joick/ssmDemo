@@ -13,5 +13,14 @@ public interface AdminUserService {
      * @param id
      * @return
      */
-    AdminUser getSysAdminUser(long id);
+    AdminUser getAdminUser(long id);
+
+    /**
+     * 验证用户账号,密码
+     *
+     * @param account
+     * @param passwrod
+     * @return
+     */
+    AdminUser getAdminUser(String account, String passwrod);
 }

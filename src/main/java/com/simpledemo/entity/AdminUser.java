@@ -57,6 +57,10 @@ public class AdminUser {
         this.modifyTime = modifyTime;
     }
 
+    public AdminUser(String account, String password){
+
+    }
+
     public AdminUser() {
         super();
     }

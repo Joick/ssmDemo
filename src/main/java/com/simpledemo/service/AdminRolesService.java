@@ -22,7 +22,7 @@ public interface AdminRolesService {
      *
      * @return
      */
-    List<AdminRoles> listAllRoles();
+    List<AdminRoles> getAllRoles();
 
     /**
      * 更新权限信息
