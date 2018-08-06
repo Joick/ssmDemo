@@ -47,7 +47,7 @@ public final class JsonUtil {
     }
 
     public static String toJsonNoFeatures(Object object) {
-        return JSON.toJSONString(object, config);
+        return JSON.toJSONString(object);
     }
 
     public static Object toBean(String text) {
