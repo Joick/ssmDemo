@@ -5,12 +5,12 @@ public final class Constant {
     /**
      * 缓存常量类
      */
-    public static final class CacheCaptche {
+    public static final class CacheCaptcha {
 
         /**
          * 短信验证码key
          */
-        private static final String SMSCAPTCHE = "_captche";
+        private static final String SMSCAPTCHA = "_captcha";
 
         /**
          * 生成短验key
@@ -18,8 +18,8 @@ public final class Constant {
          * @param phone 手机号
          * @return
          */
-        public static String GenerateSmsCacheKey(String phone) {
-            return phone + SMSCAPTCHE;
+        public static String generateSmsCacheKey(String phone) {
+            return phone + SMSCAPTCHA;
         }
     }
 }

@@ -83,7 +83,7 @@ public class AccountServiceImpl implements AccountService {
             code += random.nextInt(10);
         }
 
-        String cacheKey = Constant.CacheCaptche.GenerateSmsCacheKey(reqModel.getPhone());
+        String cacheKey = Constant.CacheCaptcha.generateSmsCacheKey(reqModel.getPhone());
 
         Cache cache = new Cache();
 
