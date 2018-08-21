@@ -4,17 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author Administrator
- */
-public class AdminUserRolesExample {
+public class TDictionaryExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public AdminUserRolesExample() {
+    public TDictionaryExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -168,63 +165,73 @@ public class AdminUserRolesExample {
             return (Criteria) this;
         }
 
-        public Criteria andUseridIsNull() {
-            addCriterion("userid is null");
+        public Criteria andNameIsNull() {
+            addCriterion("name is null");
             return (Criteria) this;
         }
 
-        public Criteria andUseridIsNotNull() {
-            addCriterion("userid is not null");
+        public Criteria andNameIsNotNull() {
+            addCriterion("name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUseridEqualTo(Long value) {
-            addCriterion("userid =", value, "userid");
+        public Criteria andNameEqualTo(String value) {
+            addCriterion("name =", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andUseridNotEqualTo(Long value) {
-            addCriterion("userid <>", value, "userid");
+        public Criteria andNameNotEqualTo(String value) {
+            addCriterion("name <>", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andUseridGreaterThan(Long value) {
-            addCriterion("userid >", value, "userid");
+        public Criteria andNameGreaterThan(String value) {
+            addCriterion("name >", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andUseridGreaterThanOrEqualTo(Long value) {
-            addCriterion("userid >=", value, "userid");
+        public Criteria andNameGreaterThanOrEqualTo(String value) {
+            addCriterion("name >=", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andUseridLessThan(Long value) {
-            addCriterion("userid <", value, "userid");
+        public Criteria andNameLessThan(String value) {
+            addCriterion("name <", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andUseridLessThanOrEqualTo(Long value) {
-            addCriterion("userid <=", value, "userid");
+        public Criteria andNameLessThanOrEqualTo(String value) {
+            addCriterion("name <=", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andUseridIn(List<Long> values) {
-            addCriterion("userid in", values, "userid");
+        public Criteria andNameLike(String value) {
+            addCriterion("name like", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andUseridNotIn(List<Long> values) {
-            addCriterion("userid not in", values, "userid");
+        public Criteria andNameNotLike(String value) {
+            addCriterion("name not like", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andUseridBetween(Long value1, Long value2) {
-            addCriterion("userid between", value1, value2, "userid");
+        public Criteria andNameIn(List<String> values) {
+            addCriterion("name in", values, "name");
             return (Criteria) this;
         }
 
-        public Criteria andUseridNotBetween(Long value1, Long value2) {
-            addCriterion("userid not between", value1, value2, "userid");
+        public Criteria andNameNotIn(List<String> values) {
+            addCriterion("name not in", values, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameBetween(String value1, String value2) {
+            addCriterion("name between", value1, value2, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameNotBetween(String value1, String value2) {
+            addCriterion("name not between", value1, value2, "name");
             return (Criteria) this;
         }
 
@@ -298,183 +305,123 @@ public class AdminUserRolesExample {
             return (Criteria) this;
         }
 
-        public Criteria andEnabledIsNull() {
-            addCriterion("enabled is null");
+        public Criteria andIsEnabledIsNull() {
+            addCriterion("is_enabled is null");
             return (Criteria) this;
         }
 
-        public Criteria andEnabledIsNotNull() {
-            addCriterion("enabled is not null");
+        public Criteria andIsEnabledIsNotNull() {
+            addCriterion("is_enabled is not null");
             return (Criteria) this;
         }
 
-        public Criteria andEnabledEqualTo(Boolean value) {
-            addCriterion("enabled =", value, "enabled");
+        public Criteria andIsEnabledEqualTo(Boolean value) {
+            addCriterion("is_enabled =", value, "isEnabled");
             return (Criteria) this;
         }
 
-        public Criteria andEnabledNotEqualTo(Boolean value) {
-            addCriterion("enabled <>", value, "enabled");
+        public Criteria andIsEnabledNotEqualTo(Boolean value) {
+            addCriterion("is_enabled <>", value, "isEnabled");
             return (Criteria) this;
         }
 
-        public Criteria andEnabledGreaterThan(Boolean value) {
-            addCriterion("enabled >", value, "enabled");
+        public Criteria andIsEnabledGreaterThan(Boolean value) {
+            addCriterion("is_enabled >", value, "isEnabled");
             return (Criteria) this;
         }
 
-        public Criteria andEnabledGreaterThanOrEqualTo(Boolean value) {
-            addCriterion("enabled >=", value, "enabled");
+        public Criteria andIsEnabledGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("is_enabled >=", value, "isEnabled");
             return (Criteria) this;
         }
 
-        public Criteria andEnabledLessThan(Boolean value) {
-            addCriterion("enabled <", value, "enabled");
+        public Criteria andIsEnabledLessThan(Boolean value) {
+            addCriterion("is_enabled <", value, "isEnabled");
             return (Criteria) this;
         }
 
-        public Criteria andEnabledLessThanOrEqualTo(Boolean value) {
-            addCriterion("enabled <=", value, "enabled");
+        public Criteria andIsEnabledLessThanOrEqualTo(Boolean value) {
+            addCriterion("is_enabled <=", value, "isEnabled");
             return (Criteria) this;
         }
 
-        public Criteria andEnabledIn(List<Boolean> values) {
-            addCriterion("enabled in", values, "enabled");
+        public Criteria andIsEnabledIn(List<Boolean> values) {
+            addCriterion("is_enabled in", values, "isEnabled");
             return (Criteria) this;
         }
 
-        public Criteria andEnabledNotIn(List<Boolean> values) {
-            addCriterion("enabled not in", values, "enabled");
+        public Criteria andIsEnabledNotIn(List<Boolean> values) {
+            addCriterion("is_enabled not in", values, "isEnabled");
             return (Criteria) this;
         }
 
-        public Criteria andEnabledBetween(Boolean value1, Boolean value2) {
-            addCriterion("enabled between", value1, value2, "enabled");
+        public Criteria andIsEnabledBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_enabled between", value1, value2, "isEnabled");
             return (Criteria) this;
         }
 
-        public Criteria andEnabledNotBetween(Boolean value1, Boolean value2) {
-            addCriterion("enabled not between", value1, value2, "enabled");
+        public Criteria andIsEnabledNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_enabled not between", value1, value2, "isEnabled");
             return (Criteria) this;
         }
 
-        public Criteria andIsactiveIsNull() {
-            addCriterion("isactive is null");
+        public Criteria andIsDeletedIsNull() {
+            addCriterion("is_deleted is null");
             return (Criteria) this;
         }
 
-        public Criteria andIsactiveIsNotNull() {
-            addCriterion("isactive is not null");
+        public Criteria andIsDeletedIsNotNull() {
+            addCriterion("is_deleted is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIsactiveEqualTo(Boolean value) {
-            addCriterion("isactive =", value, "isactive");
+        public Criteria andIsDeletedEqualTo(Boolean value) {
+            addCriterion("is_deleted =", value, "isDeleted");
             return (Criteria) this;
         }
 
-        public Criteria andIsactiveNotEqualTo(Boolean value) {
-            addCriterion("isactive <>", value, "isactive");
+        public Criteria andIsDeletedNotEqualTo(Boolean value) {
+            addCriterion("is_deleted <>", value, "isDeleted");
             return (Criteria) this;
         }
 
-        public Criteria andIsactiveGreaterThan(Boolean value) {
-            addCriterion("isactive >", value, "isactive");
+        public Criteria andIsDeletedGreaterThan(Boolean value) {
+            addCriterion("is_deleted >", value, "isDeleted");
             return (Criteria) this;
         }
 
-        public Criteria andIsactiveGreaterThanOrEqualTo(Boolean value) {
-            addCriterion("isactive >=", value, "isactive");
+        public Criteria andIsDeletedGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("is_deleted >=", value, "isDeleted");
             return (Criteria) this;
         }
 
-        public Criteria andIsactiveLessThan(Boolean value) {
-            addCriterion("isactive <", value, "isactive");
+        public Criteria andIsDeletedLessThan(Boolean value) {
+            addCriterion("is_deleted <", value, "isDeleted");
             return (Criteria) this;
         }
 
-        public Criteria andIsactiveLessThanOrEqualTo(Boolean value) {
-            addCriterion("isactive <=", value, "isactive");
+        public Criteria andIsDeletedLessThanOrEqualTo(Boolean value) {
+            addCriterion("is_deleted <=", value, "isDeleted");
             return (Criteria) this;
         }
 
-        public Criteria andIsactiveIn(List<Boolean> values) {
-            addCriterion("isactive in", values, "isactive");
+        public Criteria andIsDeletedIn(List<Boolean> values) {
+            addCriterion("is_deleted in", values, "isDeleted");
             return (Criteria) this;
         }
 
-        public Criteria andIsactiveNotIn(List<Boolean> values) {
-            addCriterion("isactive not in", values, "isactive");
+        public Criteria andIsDeletedNotIn(List<Boolean> values) {
+            addCriterion("is_deleted not in", values, "isDeleted");
             return (Criteria) this;
         }
 
-        public Criteria andIsactiveBetween(Boolean value1, Boolean value2) {
-            addCriterion("isactive between", value1, value2, "isactive");
+        public Criteria andIsDeletedBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_deleted between", value1, value2, "isDeleted");
             return (Criteria) this;
         }
 
-        public Criteria andIsactiveNotBetween(Boolean value1, Boolean value2) {
-            addCriterion("isactive not between", value1, value2, "isactive");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateUserIsNull() {
-            addCriterion("create_user is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateUserIsNotNull() {
-            addCriterion("create_user is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateUserEqualTo(Long value) {
-            addCriterion("create_user =", value, "createUser");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateUserNotEqualTo(Long value) {
-            addCriterion("create_user <>", value, "createUser");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateUserGreaterThan(Long value) {
-            addCriterion("create_user >", value, "createUser");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateUserGreaterThanOrEqualTo(Long value) {
-            addCriterion("create_user >=", value, "createUser");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateUserLessThan(Long value) {
-            addCriterion("create_user <", value, "createUser");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateUserLessThanOrEqualTo(Long value) {
-            addCriterion("create_user <=", value, "createUser");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateUserIn(List<Long> values) {
-            addCriterion("create_user in", values, "createUser");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateUserNotIn(List<Long> values) {
-            addCriterion("create_user not in", values, "createUser");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateUserBetween(Long value1, Long value2) {
-            addCriterion("create_user between", value1, value2, "createUser");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateUserNotBetween(Long value1, Long value2) {
-            addCriterion("create_user not between", value1, value2, "createUser");
+        public Criteria andIsDeletedNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_deleted not between", value1, value2, "isDeleted");
             return (Criteria) this;
         }
 
@@ -535,126 +482,6 @@ public class AdminUserRolesExample {
 
         public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
             addCriterion("create_time not between", value1, value2, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyUserIsNull() {
-            addCriterion("modify_user is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyUserIsNotNull() {
-            addCriterion("modify_user is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyUserEqualTo(Long value) {
-            addCriterion("modify_user =", value, "modifyUser");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyUserNotEqualTo(Long value) {
-            addCriterion("modify_user <>", value, "modifyUser");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyUserGreaterThan(Long value) {
-            addCriterion("modify_user >", value, "modifyUser");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyUserGreaterThanOrEqualTo(Long value) {
-            addCriterion("modify_user >=", value, "modifyUser");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyUserLessThan(Long value) {
-            addCriterion("modify_user <", value, "modifyUser");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyUserLessThanOrEqualTo(Long value) {
-            addCriterion("modify_user <=", value, "modifyUser");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyUserIn(List<Long> values) {
-            addCriterion("modify_user in", values, "modifyUser");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyUserNotIn(List<Long> values) {
-            addCriterion("modify_user not in", values, "modifyUser");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyUserBetween(Long value1, Long value2) {
-            addCriterion("modify_user between", value1, value2, "modifyUser");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyUserNotBetween(Long value1, Long value2) {
-            addCriterion("modify_user not between", value1, value2, "modifyUser");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyTimeIsNull() {
-            addCriterion("modify_time is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyTimeIsNotNull() {
-            addCriterion("modify_time is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyTimeEqualTo(Date value) {
-            addCriterion("modify_time =", value, "modifyTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyTimeNotEqualTo(Date value) {
-            addCriterion("modify_time <>", value, "modifyTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyTimeGreaterThan(Date value) {
-            addCriterion("modify_time >", value, "modifyTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("modify_time >=", value, "modifyTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyTimeLessThan(Date value) {
-            addCriterion("modify_time <", value, "modifyTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyTimeLessThanOrEqualTo(Date value) {
-            addCriterion("modify_time <=", value, "modifyTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyTimeIn(List<Date> values) {
-            addCriterion("modify_time in", values, "modifyTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyTimeNotIn(List<Date> values) {
-            addCriterion("modify_time not in", values, "modifyTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyTimeBetween(Date value1, Date value2) {
-            addCriterion("modify_time between", value1, value2, "modifyTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andModifyTimeNotBetween(Date value1, Date value2) {
-            addCriterion("modify_time not between", value1, value2, "modifyTime");
             return (Criteria) this;
         }
     }

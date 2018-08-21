@@ -149,9 +149,12 @@
         <!--</table>-->
 
         <!--已生成-->
-        <!--<table schema="ssm" tableName="admin_roles"></table>-->
-        <!--<table schema="ssm" tableName="admin_user"></table>-->
-        <!--<table schema="ssm" tableName="admin_user_roles"></table>-->
+        <table schema="bbs_db" tableName="t_dictionary"></table>
+        <table schema="bbs_db" tableName="t_dictionary_item"></table>
+        <table schema="bbs_db" tableName="t_module"></table>
+        <table schema="bbs_db" tableName="t_post"></table>
+        <table schema="bbs_db" tableName="t_post_repay"></table>
+        <table schema="bbs_db" tableName="t_user"></table>
 
     </context>
 </generatorConfiguration>

@@ -1,4 +1,4 @@
-package com.simpledemo.utilities;
+package com.simpledemo.utility;
 
 /**
  * 封装json对象,所有返回结果都使用它

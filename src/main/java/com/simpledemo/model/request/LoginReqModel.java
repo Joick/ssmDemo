@@ -1,12 +1,11 @@
-package com.simpledemo.model.home;
+package com.simpledemo.model.request;
 
 /**
- * @author Administrator
+ * @author hey
  */
-public class LoginModel {
+public class LoginReqModel {
     private String account;
     private String password;
-
     private String verifyCode;
 
     public String getAccount() {
