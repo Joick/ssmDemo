@@ -3,14 +3,18 @@ package com.simpledemo.service.impl;
 import com.simpledemo.dao.TUserMapper;
 import com.simpledemo.entity.TUser;
 import com.simpledemo.entity.TUserExample;
+import com.simpledemo.model.common.Cache;
+import com.simpledemo.model.common.Constant;
 import com.simpledemo.model.request.LoginReqModel;
 import com.simpledemo.model.request.RegisterReqModel;
+import com.simpledemo.model.request.SendSmsMessageReqModel;
 import com.simpledemo.service.AccountService;
 import com.simpledemo.utility.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author hey
@@ -63,5 +67,31 @@ public class AccountServiceImpl implements AccountService {
 
         return result;
 
+    }
+
+    public Result doSendSmsMessage(SendSmsMessageReqModel reqModel) {
+
+        Result result = new Result();
+
+        Random random = new Random();
+
+        String code = "";
+
+        for (int i = 0; i < 6; i++) {
+
+            // 生成 [0,10) 中的随机数
+            code += random.nextInt(10);
+        }
+
+        String cacheKey = Constant.CacheCaptche.GenerateSmsCacheKey(reqModel.getPhone());
+
+        Cache cache = new Cache();
+
+        cache.setKey(cacheKey);
+        cache.setValue(code);
+
+        result.success();
+
+        return result;
     }
 }
