@@ -72,7 +72,7 @@ public final class CacheUtil {
      * @param key
      * @return
      */
-    private synchronized static Cache getCache(String key) {
+    public synchronized static Cache getCache(String key) {
         return (Cache) cacheMap.get(key);
     }
 
@@ -82,7 +82,7 @@ public final class CacheUtil {
      * @param key
      * @return
      */
-    private synchronized static boolean hasCache(String key) {
+    public synchronized static boolean hasCache(String key) {
         return cacheMap.containsKey(key);
     }
 

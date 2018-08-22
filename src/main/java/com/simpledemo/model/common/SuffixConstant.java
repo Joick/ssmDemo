@@ -1,11 +1,14 @@
 package com.simpledemo.model.common;
 
-public final class Constant {
+/**
+ * 后缀规则
+ */
+public final class SuffixConstant {
 
     /**
-     * 缓存常量类
+     * 验证
      */
-    public static final class CacheCaptcha {
+    public static final class Captcha {
 
         /**
          * 短信验证码key

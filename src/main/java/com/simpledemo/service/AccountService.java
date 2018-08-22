@@ -1,13 +1,10 @@
 package com.simpledemo.service;
 
-import com.simpledemo.entity.TUser;
 import com.simpledemo.model.request.LoginReqModel;
 import com.simpledemo.model.request.RegisterReqModel;
+import com.simpledemo.model.request.SendSmsMessageReqModel;
 import com.simpledemo.utility.Result;
 
-/**
- * @author hey
- */
 public interface AccountService {
 
     /**
@@ -16,7 +13,7 @@ public interface AccountService {
      * @param reqModel
      * @return
      */
-    Result<String> doUserRegist(RegisterReqModel reqModel);
+    Result doUserRegist(RegisterReqModel reqModel);
 
     /**
      * 用户登录
@@ -24,5 +21,13 @@ public interface AccountService {
      * @param reqModel
      * @return
      */
-    Result<TUser> doUserLogin(LoginReqModel reqModel);
+    Result doUserLogin(LoginReqModel reqModel);
+
+    /**
+     * 发送短信验证码
+     *
+     * @param reqModel
+     * @return
+     */
+    Result doSendSmsMessage(SendSmsMessageReqModel reqModel);
 }

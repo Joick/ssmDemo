@@ -4,32 +4,31 @@ import com.simpledemo.dao.TUserMapper;
 import com.simpledemo.entity.TUser;
 import com.simpledemo.entity.TUserExample;
 import com.simpledemo.model.common.Cache;
-import com.simpledemo.model.common.Constant;
+import com.simpledemo.model.common.SuffixConstant;
 import com.simpledemo.model.request.LoginReqModel;
 import com.simpledemo.model.request.RegisterReqModel;
 import com.simpledemo.model.request.SendSmsMessageReqModel;
 import com.simpledemo.service.AccountService;
+import com.simpledemo.utility.CacheUtil;
 import com.simpledemo.utility.Result;
+import com.simpledemo.utility.UuidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Random;
 
-/**
- * @author hey
- */
 @Service
 public class AccountServiceImpl implements AccountService {
+
+    private Result result = new Result();
 
     @Autowired
     private TUserMapper tUserMapper;
 
     private TUserExample tUserExample = new TUserExample();
 
-    public Result<String> doUserRegist(RegisterReqModel reqModel) {
-
-        Result<String> result = new Result<String>();
+    public Result doUserRegist(RegisterReqModel reqModel) {
 
         TUser tUser = reqModel.convertToEntity();
 
@@ -40,15 +39,57 @@ public class AccountServiceImpl implements AccountService {
         return result;
     }
 
-    public Result<TUser> doUserLogin(LoginReqModel reqModel) {
+    public Result doUserLogin(LoginReqModel reqModel) {
 
-        Result<TUser> result = new Result<TUser>();
+        if (reqModel != null) {
+            switch (reqModel.getLoginType()) {
+                case ACCOUNT:
+                    result = doAccountLogin(reqModel);
+                    break;
+                case SMSCAPTCHA:
+                    result = doSmsCaptchaLogin(reqModel);
+                    break;
+                default:
+                    result.fail("请求数据有误");
+                    break;
+            }
+        } else {
+            result.fail("请求数据为空");
+        }
 
+        return result;
+
+    }
+
+    public Result doSendSmsMessage(SendSmsMessageReqModel reqModel) {
+
+        Random random = new Random();
+
+        String code = "";
+
+        for (int i = 0; i < 6; i++) {
+
+            // 生成 [0,10) 中的随机数
+            code += random.nextInt(10);
+        }
+
+        String cacheKey = SuffixConstant.Captcha.generateSmsCacheKey(reqModel.getPhone());
+
+        Cache cache = new Cache();
+
+        cache.setKey(cacheKey);
+        cache.setValue(code);
+
+        result.success(cache);
+
+        return result;
+    }
+
+    private Result doAccountLogin(LoginReqModel reqModel) {
         String verifyCode = reqModel.getVerifyCode();
 
-        if ("123456" != verifyCode) {
-            result.fail("验证码不正确");
-
+        if (verifyCode == null || verifyCode.length() <= 0) {
+            result.fail("验证码不能为空");
             return result;
         }
 
@@ -66,32 +107,45 @@ public class AccountServiceImpl implements AccountService {
         result.success(user);
 
         return result;
-
     }
 
-    public Result doSendSmsMessage(SendSmsMessageReqModel reqModel) {
+    private Result doSmsCaptchaLogin(LoginReqModel reqModel) {
+        String key = SuffixConstant.Captcha.generateSmsCacheKey(reqModel.getPhone());
 
-        Result result = new Result();
+        if (CacheUtil.hasCache(key)) {
+            Cache cache = CacheUtil.getCacheInfo(key);
 
-        Random random = new Random();
+            if (cache.getValue() == null) {
+                result.fail("验证码已过期");
+                return result;
+            }
 
-        String code = "";
+            if (reqModel.getSmsCode() != cache.getValue()) {
+                result.fail("验证码不正确");
+                return result;
+            }
 
-        for (int i = 0; i < 6; i++) {
+            TUserExample tUserExample = new TUserExample();
 
-            // 生成 [0,10) 中的随机数
-            code += random.nextInt(10);
+            tUserExample.createCriteria().andPhoneEqualTo(reqModel.getPhone());
+
+            List<TUser> tUserList = tUserMapper.selectByExample(tUserExample);
+
+            if (tUserList.size() <= 0) {
+                TUser tUser = new TUser();
+                tUser.setAccount(UuidUtil.getUUID());
+                tUser.setPhone(reqModel.getPhone());
+                tUser.setRoleId((long) 1);
+                tUser.setRoleName("普通用户");
+
+                tUserMapper.insert(tUser);
+            }
+
+            result.success("登录成功");
+            return result;
+        } else {
+            result.fail("验证码已过期");
+            return result;
         }
-
-        String cacheKey = Constant.CacheCaptcha.generateSmsCacheKey(reqModel.getPhone());
-
-        Cache cache = new Cache();
-
-        cache.setKey(cacheKey);
-        cache.setValue(code);
-
-        result.success();
-
-        return result;
     }
 }
