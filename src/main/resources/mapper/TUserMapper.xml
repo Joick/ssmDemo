@@ -113,17 +113,15 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.simpledemo.entity.TUser">
-    insert into t_user (id, account, nick_name, 
+    insert into t_user (account, nick_name,
       password, phone, email, 
       gender, role_id, role_name, 
-      signature, registe_time, registre_ip, 
-      is_enabled, is_deleted, create_time
+      signature, registe_time, registre_ip
       )
-    values (#{id,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+    values (#{account,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR},
       #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{gender,jdbcType=INTEGER}, #{roleId,jdbcType=BIGINT}, #{roleName,jdbcType=VARCHAR}, 
-      #{signature,jdbcType=VARCHAR}, #{registeTime,jdbcType=TIMESTAMP}, #{registreIp,jdbcType=VARCHAR}, 
-      #{isEnabled,jdbcType=BIT}, #{isDeleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}
+      #{signature,jdbcType=VARCHAR}, #{registeTime,jdbcType=TIMESTAMP}, #{registreIp,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.simpledemo.entity.TUser">

@@ -2,9 +2,6 @@ package com.simpledemo.utility;
 
 import java.util.UUID;
 
-/**
- * @author hey
- */
 public final class UuidUtil {
 
     /**

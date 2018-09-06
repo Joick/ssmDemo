@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * redis工具类
  */
-public final class RedisUtil {
+public class RedisUtil {
     private final String address = "127.0.0.1";
     private final int port = 6379;
     private final String password = "admin123";
@@ -38,14 +38,39 @@ public final class RedisUtil {
         }
     }
 
-    private static void getJedis() {
+    private final void getJedis() {
         if (jedisPool != null) {
             jedis = jedisPool.getResource();
         }
     }
 
-    public static void del(String key) {
+    /**
+     * 删除key & value
+     *
+     * @param key
+     */
+    public final void del(String key) {
         jedis.del(key);
+    }
+
+    /**
+     * 设置缓存过期时间
+     *
+     * @param key
+     * @param seconds
+     */
+    public final void setTimeOut(String key, int seconds) {
+        jedis.expire(key, seconds);
+    }
+
+    /**
+     * 插叙是否有缓存值
+     *
+     * @param key
+     * @return
+     */
+    public final boolean stringHasValue(String key) {
+        return jedis.get(key) != null;
     }
 
     /**
@@ -54,8 +79,8 @@ public final class RedisUtil {
      * @param key
      * @param data
      */
-    public static void stringSet(String key, String data) {
-        jedis.set(key, key);
+    public final void stringSet(String key, String data) {
+        jedis.set(key, data);
     }
 
     /**
@@ -64,7 +89,7 @@ public final class RedisUtil {
      * @param key
      * @return
      */
-    public static String stringGet(String key) {
+    public final String stringGet(String key) {
         return jedis.get(key);
     }
 
@@ -73,7 +98,7 @@ public final class RedisUtil {
      *
      * @param keysNDatas
      */
-    public static void stringMultiSet(String... keysNDatas) {
+    public final void stringMultiSet(String... keysNDatas) {
         jedis.mset(keysNDatas);
     }
 
@@ -83,7 +108,7 @@ public final class RedisUtil {
      * @param key
      * @param num
      */
-    public static void stringInc(String key, int num) {
+    public final void stringInc(String key, int num) {
         if (num > 1) {
             jedis.incrBy(key, num);
         } else {
@@ -97,7 +122,7 @@ public final class RedisUtil {
      * @param key
      * @param data
      */
-    public static void stringAppend(String key, String data) {
+    public final void stringAppend(String key, String data) {
         jedis.append(key, data);
     }
 
@@ -108,7 +133,7 @@ public final class RedisUtil {
      * @param fields
      * @return
      */
-    public static List<String> mapGet(String key, String... fields) {
+    public final List<String> mapGet(String key, String... fields) {
         return jedis.hmget(key, fields);
     }
 
@@ -118,7 +143,7 @@ public final class RedisUtil {
      * @param key
      * @param data
      */
-    public static void mapSet(String key, Map<String, String> data) {
+    public final void mapSet(String key, Map<String, String> data) {
         jedis.hmset(key, data);
     }
 
@@ -128,15 +153,17 @@ public final class RedisUtil {
      * @param key
      * @param itemKeys
      */
-    public static void mapDel(String key, String... itemKeys) {
+    public final void mapDel(String key, String... itemKeys) {
         jedis.hdel(key, itemKeys);
     }
 
     /**
+     * 获取list类型缓存数据
+     *
      * @param key
      * @param data
      */
-    public static List<String> listGet(String key, List<Object> data) {
+    public final List<String> listGet(String key, List<Object> data) {
         return jedis.lrange(key, 0, -1);
     }
 

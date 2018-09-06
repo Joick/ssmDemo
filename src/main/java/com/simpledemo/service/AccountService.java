@@ -30,4 +30,7 @@ public interface AccountService {
      * @return
      */
     Result doSendSmsMessage(SendSmsMessageReqModel reqModel);
+
+    Result updateUserAccount(LoginReqModel reqModel);
+
 }
