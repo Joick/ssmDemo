@@ -31,6 +31,4 @@ public interface AccountService {
      */
     Result doSendSmsMessage(SendSmsMessageReqModel reqModel);
 
-    Result updateUserAccount(LoginReqModel reqModel);
-
 }
