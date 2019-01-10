@@ -1,0 +1,1108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.simpledemo.dao.TPostMapper">
+  <resultMap id="BaseResultMap" type="com.simpledemo.entity.TPost">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="module_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="module_title" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="height" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="description" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="read_count" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="up_count" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="down_count" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="favorite_count" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="is_top" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="is_enabled" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="is_deleted" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="create_user" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, title, module_id, module_title, height, description, read_count, up_count, down_count, 
+    favorite_count, is_top, is_enabled, is_deleted, create_user, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.simpledemo.entity.TPostExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_post
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_post
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.simpledemo.entity.TPostExample">
+    delete from t_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.simpledemo.entity.TPost">
+    insert into t_post (id, title, module_id, 
+      module_title, height, description, 
+      read_count, up_count, down_count, 
+      favorite_count, is_top, is_enabled, 
+      is_deleted, create_user, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{moduleId,jdbcType=BIGINT}, 
+      #{moduleTitle,jdbcType=VARCHAR}, #{height,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, 
+      #{readCount,jdbcType=INTEGER}, #{upCount,jdbcType=INTEGER}, #{downCount,jdbcType=INTEGER}, 
+      #{favoriteCount,jdbcType=INTEGER}, #{isTop,jdbcType=BIT}, #{isEnabled,jdbcType=BIT}, 
+      #{isDeleted,jdbcType=BIT}, #{createUser,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.simpledemo.entity.TPost">
+    insert into t_post
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="moduleId != null">
+        module_id,
+      </if>
+      <if test="moduleTitle != null">
+        module_title,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="readCount != null">
+        read_count,
+      </if>
+      <if test="upCount != null">
+        up_count,
+      </if>
+      <if test="downCount != null">
+        down_count,
+      </if>
+      <if test="favoriteCount != null">
+        favorite_count,
+      </if>
+      <if test="isTop != null">
+        is_top,
+      </if>
+      <if test="isEnabled != null">
+        is_enabled,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleId != null">
+        #{moduleId,jdbcType=BIGINT},
+      </if>
+      <if test="moduleTitle != null">
+        #{moduleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=BIGINT},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="readCount != null">
+        #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="upCount != null">
+        #{upCount,jdbcType=INTEGER},
+      </if>
+      <if test="downCount != null">
+        #{downCount,jdbcType=INTEGER},
+      </if>
+      <if test="favoriteCount != null">
+        #{favoriteCount,jdbcType=INTEGER},
+      </if>
+      <if test="isTop != null">
+        #{isTop,jdbcType=BIT},
+      </if>
+      <if test="isEnabled != null">
+        #{isEnabled,jdbcType=BIT},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.simpledemo.entity.TPostExample" resultType="java.lang.Long">
+    select count(*) from t_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_post
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleId != null">
+        module_id = #{record.moduleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.moduleTitle != null">
+        module_title = #{record.moduleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.height != null">
+        height = #{record.height,jdbcType=BIGINT},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.readCount != null">
+        read_count = #{record.readCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.upCount != null">
+        up_count = #{record.upCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.downCount != null">
+        down_count = #{record.downCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.favoriteCount != null">
+        favorite_count = #{record.favoriteCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.isTop != null">
+        is_top = #{record.isTop,jdbcType=BIT},
+      </if>
+      <if test="record.isEnabled != null">
+        is_enabled = #{record.isEnabled,jdbcType=BIT},
+      </if>
+      <if test="record.isDeleted != null">
+        is_deleted = #{record.isDeleted,jdbcType=BIT},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_post
+    set id = #{record.id,jdbcType=BIGINT},
+      title = #{record.title,jdbcType=VARCHAR},
+      module_id = #{record.moduleId,jdbcType=BIGINT},
+      module_title = #{record.moduleTitle,jdbcType=VARCHAR},
+      height = #{record.height,jdbcType=BIGINT},
+      description = #{record.description,jdbcType=VARCHAR},
+      read_count = #{record.readCount,jdbcType=INTEGER},
+      up_count = #{record.upCount,jdbcType=INTEGER},
+      down_count = #{record.downCount,jdbcType=INTEGER},
+      favorite_count = #{record.favoriteCount,jdbcType=INTEGER},
+      is_top = #{record.isTop,jdbcType=BIT},
+      is_enabled = #{record.isEnabled,jdbcType=BIT},
+      is_deleted = #{record.isDeleted,jdbcType=BIT},
+      create_user = #{record.createUser,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.simpledemo.entity.TPost">
+    update t_post
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleId != null">
+        module_id = #{moduleId,jdbcType=BIGINT},
+      </if>
+      <if test="moduleTitle != null">
+        module_title = #{moduleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=BIGINT},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="readCount != null">
+        read_count = #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="upCount != null">
+        up_count = #{upCount,jdbcType=INTEGER},
+      </if>
+      <if test="downCount != null">
+        down_count = #{downCount,jdbcType=INTEGER},
+      </if>
+      <if test="favoriteCount != null">
+        favorite_count = #{favoriteCount,jdbcType=INTEGER},
+      </if>
+      <if test="isTop != null">
+        is_top = #{isTop,jdbcType=BIT},
+      </if>
+      <if test="isEnabled != null">
+        is_enabled = #{isEnabled,jdbcType=BIT},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.simpledemo.entity.TPost">
+    update t_post
+    set title = #{title,jdbcType=VARCHAR},
+      module_id = #{moduleId,jdbcType=BIGINT},
+      module_title = #{moduleTitle,jdbcType=VARCHAR},
+      height = #{height,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR},
+      read_count = #{readCount,jdbcType=INTEGER},
+      up_count = #{upCount,jdbcType=INTEGER},
+      down_count = #{downCount,jdbcType=INTEGER},
+      favorite_count = #{favoriteCount,jdbcType=INTEGER},
+      is_top = #{isTop,jdbcType=BIT},
+      is_enabled = #{isEnabled,jdbcType=BIT},
+      is_deleted = #{isDeleted,jdbcType=BIT},
+      create_user = #{createUser,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.simpledemo.entity.TPost">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="module_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="module_title" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="height" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="description" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="read_count" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="up_count" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="down_count" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="favorite_count" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="is_top" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="is_enabled" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="is_deleted" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="create_user" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, title, module_id, module_title, height, description, read_count, up_count, down_count, 
+    favorite_count, is_top, is_enabled, is_deleted, create_user, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.simpledemo.entity.TPostExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_post
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_post
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.simpledemo.entity.TPostExample">
+    delete from t_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.simpledemo.entity.TPost">
+    insert into t_post (id, title, module_id, 
+      module_title, height, description, 
+      read_count, up_count, down_count, 
+      favorite_count, is_top, is_enabled, 
+      is_deleted, create_user, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{moduleId,jdbcType=BIGINT}, 
+      #{moduleTitle,jdbcType=VARCHAR}, #{height,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, 
+      #{readCount,jdbcType=INTEGER}, #{upCount,jdbcType=INTEGER}, #{downCount,jdbcType=INTEGER}, 
+      #{favoriteCount,jdbcType=INTEGER}, #{isTop,jdbcType=BIT}, #{isEnabled,jdbcType=BIT}, 
+      #{isDeleted,jdbcType=BIT}, #{createUser,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.simpledemo.entity.TPost">
+    insert into t_post
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="moduleId != null">
+        module_id,
+      </if>
+      <if test="moduleTitle != null">
+        module_title,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="readCount != null">
+        read_count,
+      </if>
+      <if test="upCount != null">
+        up_count,
+      </if>
+      <if test="downCount != null">
+        down_count,
+      </if>
+      <if test="favoriteCount != null">
+        favorite_count,
+      </if>
+      <if test="isTop != null">
+        is_top,
+      </if>
+      <if test="isEnabled != null">
+        is_enabled,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleId != null">
+        #{moduleId,jdbcType=BIGINT},
+      </if>
+      <if test="moduleTitle != null">
+        #{moduleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=BIGINT},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="readCount != null">
+        #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="upCount != null">
+        #{upCount,jdbcType=INTEGER},
+      </if>
+      <if test="downCount != null">
+        #{downCount,jdbcType=INTEGER},
+      </if>
+      <if test="favoriteCount != null">
+        #{favoriteCount,jdbcType=INTEGER},
+      </if>
+      <if test="isTop != null">
+        #{isTop,jdbcType=BIT},
+      </if>
+      <if test="isEnabled != null">
+        #{isEnabled,jdbcType=BIT},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.simpledemo.entity.TPostExample" resultType="java.lang.Long">
+    select count(*) from t_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_post
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleId != null">
+        module_id = #{record.moduleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.moduleTitle != null">
+        module_title = #{record.moduleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.height != null">
+        height = #{record.height,jdbcType=BIGINT},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.readCount != null">
+        read_count = #{record.readCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.upCount != null">
+        up_count = #{record.upCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.downCount != null">
+        down_count = #{record.downCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.favoriteCount != null">
+        favorite_count = #{record.favoriteCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.isTop != null">
+        is_top = #{record.isTop,jdbcType=BIT},
+      </if>
+      <if test="record.isEnabled != null">
+        is_enabled = #{record.isEnabled,jdbcType=BIT},
+      </if>
+      <if test="record.isDeleted != null">
+        is_deleted = #{record.isDeleted,jdbcType=BIT},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_post
+    set id = #{record.id,jdbcType=BIGINT},
+      title = #{record.title,jdbcType=VARCHAR},
+      module_id = #{record.moduleId,jdbcType=BIGINT},
+      module_title = #{record.moduleTitle,jdbcType=VARCHAR},
+      height = #{record.height,jdbcType=BIGINT},
+      description = #{record.description,jdbcType=VARCHAR},
+      read_count = #{record.readCount,jdbcType=INTEGER},
+      up_count = #{record.upCount,jdbcType=INTEGER},
+      down_count = #{record.downCount,jdbcType=INTEGER},
+      favorite_count = #{record.favoriteCount,jdbcType=INTEGER},
+      is_top = #{record.isTop,jdbcType=BIT},
+      is_enabled = #{record.isEnabled,jdbcType=BIT},
+      is_deleted = #{record.isDeleted,jdbcType=BIT},
+      create_user = #{record.createUser,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.simpledemo.entity.TPost">
+    update t_post
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleId != null">
+        module_id = #{moduleId,jdbcType=BIGINT},
+      </if>
+      <if test="moduleTitle != null">
+        module_title = #{moduleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=BIGINT},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="readCount != null">
+        read_count = #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="upCount != null">
+        up_count = #{upCount,jdbcType=INTEGER},
+      </if>
+      <if test="downCount != null">
+        down_count = #{downCount,jdbcType=INTEGER},
+      </if>
+      <if test="favoriteCount != null">
+        favorite_count = #{favoriteCount,jdbcType=INTEGER},
+      </if>
+      <if test="isTop != null">
+        is_top = #{isTop,jdbcType=BIT},
+      </if>
+      <if test="isEnabled != null">
+        is_enabled = #{isEnabled,jdbcType=BIT},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.simpledemo.entity.TPost">
+    update t_post
+    set title = #{title,jdbcType=VARCHAR},
+      module_id = #{moduleId,jdbcType=BIGINT},
+      module_title = #{moduleTitle,jdbcType=VARCHAR},
+      height = #{height,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR},
+      read_count = #{readCount,jdbcType=INTEGER},
+      up_count = #{upCount,jdbcType=INTEGER},
+      down_count = #{downCount,jdbcType=INTEGER},
+      favorite_count = #{favoriteCount,jdbcType=INTEGER},
+      is_top = #{isTop,jdbcType=BIT},
+      is_enabled = #{isEnabled,jdbcType=BIT},
+      is_deleted = #{isDeleted,jdbcType=BIT},
+      create_user = #{createUser,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.simpledemo.entity.TPost">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="module_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="module_title" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="height" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="description" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="read_count" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="up_count" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="down_count" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="favorite_count" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="is_top" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="is_enabled" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="is_deleted" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="create_user" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, title, module_id, module_title, height, description, read_count, up_count, down_count, 
+    favorite_count, is_top, is_enabled, is_deleted, create_user, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.simpledemo.entity.TPostExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_post
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_post
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.simpledemo.entity.TPostExample">
+    delete from t_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.simpledemo.entity.TPost">
+    insert into t_post (id, title, module_id, 
+      module_title, height, description, 
+      read_count, up_count, down_count, 
+      favorite_count, is_top, is_enabled, 
+      is_deleted, create_user, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{moduleId,jdbcType=BIGINT}, 
+      #{moduleTitle,jdbcType=VARCHAR}, #{height,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, 
+      #{readCount,jdbcType=INTEGER}, #{upCount,jdbcType=INTEGER}, #{downCount,jdbcType=INTEGER}, 
+      #{favoriteCount,jdbcType=INTEGER}, #{isTop,jdbcType=BIT}, #{isEnabled,jdbcType=BIT}, 
+      #{isDeleted,jdbcType=BIT}, #{createUser,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.simpledemo.entity.TPost">
+    insert into t_post
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="moduleId != null">
+        module_id,
+      </if>
+      <if test="moduleTitle != null">
+        module_title,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="readCount != null">
+        read_count,
+      </if>
+      <if test="upCount != null">
+        up_count,
+      </if>
+      <if test="downCount != null">
+        down_count,
+      </if>
+      <if test="favoriteCount != null">
+        favorite_count,
+      </if>
+      <if test="isTop != null">
+        is_top,
+      </if>
+      <if test="isEnabled != null">
+        is_enabled,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleId != null">
+        #{moduleId,jdbcType=BIGINT},
+      </if>
+      <if test="moduleTitle != null">
+        #{moduleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=BIGINT},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="readCount != null">
+        #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="upCount != null">
+        #{upCount,jdbcType=INTEGER},
+      </if>
+      <if test="downCount != null">
+        #{downCount,jdbcType=INTEGER},
+      </if>
+      <if test="favoriteCount != null">
+        #{favoriteCount,jdbcType=INTEGER},
+      </if>
+      <if test="isTop != null">
+        #{isTop,jdbcType=BIT},
+      </if>
+      <if test="isEnabled != null">
+        #{isEnabled,jdbcType=BIT},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.simpledemo.entity.TPostExample" resultType="java.lang.Long">
+    select count(*) from t_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_post
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleId != null">
+        module_id = #{record.moduleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.moduleTitle != null">
+        module_title = #{record.moduleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.height != null">
+        height = #{record.height,jdbcType=BIGINT},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.readCount != null">
+        read_count = #{record.readCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.upCount != null">
+        up_count = #{record.upCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.downCount != null">
+        down_count = #{record.downCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.favoriteCount != null">
+        favorite_count = #{record.favoriteCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.isTop != null">
+        is_top = #{record.isTop,jdbcType=BIT},
+      </if>
+      <if test="record.isEnabled != null">
+        is_enabled = #{record.isEnabled,jdbcType=BIT},
+      </if>
+      <if test="record.isDeleted != null">
+        is_deleted = #{record.isDeleted,jdbcType=BIT},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_post
+    set id = #{record.id,jdbcType=BIGINT},
+      title = #{record.title,jdbcType=VARCHAR},
+      module_id = #{record.moduleId,jdbcType=BIGINT},
+      module_title = #{record.moduleTitle,jdbcType=VARCHAR},
+      height = #{record.height,jdbcType=BIGINT},
+      description = #{record.description,jdbcType=VARCHAR},
+      read_count = #{record.readCount,jdbcType=INTEGER},
+      up_count = #{record.upCount,jdbcType=INTEGER},
+      down_count = #{record.downCount,jdbcType=INTEGER},
+      favorite_count = #{record.favoriteCount,jdbcType=INTEGER},
+      is_top = #{record.isTop,jdbcType=BIT},
+      is_enabled = #{record.isEnabled,jdbcType=BIT},
+      is_deleted = #{record.isDeleted,jdbcType=BIT},
+      create_user = #{record.createUser,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.simpledemo.entity.TPost">
+    update t_post
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleId != null">
+        module_id = #{moduleId,jdbcType=BIGINT},
+      </if>
+      <if test="moduleTitle != null">
+        module_title = #{moduleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=BIGINT},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="readCount != null">
+        read_count = #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="upCount != null">
+        up_count = #{upCount,jdbcType=INTEGER},
+      </if>
+      <if test="downCount != null">
+        down_count = #{downCount,jdbcType=INTEGER},
+      </if>
+      <if test="favoriteCount != null">
+        favorite_count = #{favoriteCount,jdbcType=INTEGER},
+      </if>
+      <if test="isTop != null">
+        is_top = #{isTop,jdbcType=BIT},
+      </if>
+      <if test="isEnabled != null">
+        is_enabled = #{isEnabled,jdbcType=BIT},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.simpledemo.entity.TPost">
+    update t_post
+    set title = #{title,jdbcType=VARCHAR},
+      module_id = #{moduleId,jdbcType=BIGINT},
+      module_title = #{moduleTitle,jdbcType=VARCHAR},
+      height = #{height,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR},
+      read_count = #{readCount,jdbcType=INTEGER},
+      up_count = #{upCount,jdbcType=INTEGER},
+      down_count = #{downCount,jdbcType=INTEGER},
+      favorite_count = #{favoriteCount,jdbcType=INTEGER},
+      is_top = #{isTop,jdbcType=BIT},
+      is_enabled = #{isEnabled,jdbcType=BIT},
+      is_deleted = #{isDeleted,jdbcType=BIT},
+      create_user = #{createUser,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

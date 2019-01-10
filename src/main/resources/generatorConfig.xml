@@ -149,12 +149,12 @@
         <!--</table>-->
 
         <!--已生成-->
-        <table schema="bbs_db" tableName="t_dictionary"></table>
-        <table schema="bbs_db" tableName="t_dictionary_item"></table>
-        <table schema="bbs_db" tableName="t_module"></table>
+        <!--<table schema="bbs_db" tableName="t_dictionary"></table>-->
+        <!--<table schema="bbs_db" tableName="t_dictionary_item"></table>-->
+        <!--<table schema="bbs_db" tableName="t_module"></table>-->
         <table schema="bbs_db" tableName="t_post"></table>
         <table schema="bbs_db" tableName="t_post_repay"></table>
-        <table schema="bbs_db" tableName="t_user"></table>
+        <!--<table schema="bbs_db" tableName="t_user"></table>-->
 
     </context>
 </generatorConfiguration>
